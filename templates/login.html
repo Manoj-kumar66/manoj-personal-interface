@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MANOJ :: ACCESS</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="hud login">
+    <h1>SYSTEM AUTHORIZATION</h1>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST">
+        <input type="password" name="password" placeholder="ENTER PIN" required>
+        <button type="submit">AUTHENTICATE</button>
+    </form>
+</div>
+
+<div class="scanline"></div>
+
+</body>
+</html>
