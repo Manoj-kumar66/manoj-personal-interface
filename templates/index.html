@@ -20,12 +20,32 @@
                     ▶ {{ file }}
                 </a>
             </li>
+<div class="assistant">
+    <h2>AI COMMAND INTERFACE</h2>
+    <input id="cmd" placeholder="Type command (ex: open miniproject)">
+    <button onclick="runCommand()">EXECUTE</button>
+</div>
+
             {% endfor %}
         </ul>
     </div>
 </div>
 
 <div class="scanline"></div>
+<script>
+function runCommand() {
+    const cmd = document.getElementById("cmd").value.toLowerCase();
+
+    {% for file in files %}
+    if (cmd.includes("{{ file.lower() }}")) {
+        window.open("/files/{{ file }}", "_blank");
+        return;
+    }
+    {% endfor %}
+
+    alert("COMMAND NOT RECOGNIZED");
+}
+</script>
 
 </body>
 </html>
