@@ -1,97 +1,75 @@
-body {
+* {
     margin: 0;
-    background: black;
-    color: #00ffcc;
-    font-family: 'Courier New', monospace;
-    overflow: hidden;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Consolas, monospace;
+}
+
+body {
+    background: radial-gradient(circle, #020a0f, #000);
+    color: #00ffe1;
+    height: 100vh;
 }
 
 .hud {
-    padding: 30px;
-    border: 2px solid #00ffcc;
-    margin: 40px;
-    box-shadow: 0 0 20px #00ffcc;
+    width: 80%;
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 25px;
+    border: 1px solid rgba(0,255,225,0.4);
+    background: rgba(0,0,0,0.6);
+    box-shadow: 0 0 30px rgba(0,255,225,0.2);
 }
 
 h1 {
     text-align: center;
-    letter-spacing: 3px;
-    text-shadow: 0 0 10px #00ffcc;
+    margin-bottom: 10px;
 }
 
 .status {
     text-align: center;
-    color: #0f0;
+    color: #00ff66;
     margin-bottom: 20px;
-}
-
-.files {
-    margin-top: 30px;
-}
-
-.files h2 {
-    border-bottom: 1px solid #00ffcc;
-    padding-bottom: 10px;
 }
 
 .files ul {
     list-style: none;
-    padding: 0;
 }
 
 .files li {
-    margin: 10px 0;
+    margin: 8px 0;
 }
 
 .files a {
-    color: #00ffcc;
+    color: #00ffe1;
     text-decoration: none;
-    font-size: 18px;
 }
 
 .files a:hover {
-    color: #ffffff;
-    text-shadow: 0 0 10px #00ffcc;
+    text-shadow: 0 0 8px #00ffe1;
 }
 
-.scanline {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-        to bottom,
-        rgba(0,255,204,0.05),
-        rgba(0,255,204,0.05) 1px,
-        transparent 1px,
-        transparent 3px
-    );
-    pointer-events: none;
-}
-/* === LOGIN PANEL === */
-.login {
-    max-width: 400px;
-    text-align: center;
+.preview {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid rgba(0,255,225,0.3);
+    background: rgba(0,0,0,0.7);
 }
 
-input {
+.preview pre {
+    max-height: 300px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    font-size: 14px;
+}
+
+input, button {
     width: 100%;
     padding: 12px;
-    margin: 15px 0;
+    margin-top: 12px;
     background: black;
     border: 1px solid #00ffe1;
     color: #00ffe1;
-    text-align: center;
-    font-size: 16px;
-}
-
-button {
-    width: 100%;
-    padding: 12px;
-    background: transparent;
-    border: 1px solid #00ffe1;
-    color: #00ffe1;
-    cursor: pointer;
-    transition: 0.3s;
 }
 
 button:hover {
@@ -101,15 +79,26 @@ button:hover {
 
 .error {
     color: red;
-    margin-bottom: 10px;
+    text-align: center;
 }
 
-/* === HUD GLOW ANIMATION === */
-.hud {
-    animation: glow 2.5s infinite alternate;
+.logout {
+    color: #00ffe1;
+    text-decoration: none;
 }
 
-@keyframes glow {
-    from { box-shadow: 0 0 15px #00ffe1; }
-    to { box-shadow: 0 0 35px #00ffe1; }
+.scanline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.03),
+        rgba(255,255,255,0.03) 1px,
+        transparent 2px,
+        transparent 4px
+    );
 }
