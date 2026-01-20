@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MANOJ :: SYSTEM</title>
+    <title>MANOJ :: CYBER SYSTEM</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
@@ -10,44 +10,40 @@
 
 {% if not session.auth %}
 
-    <!-- 🔐 LOGIN -->
-    <h1>SYSTEM ACCESS</h1>
+<h1>SYSTEM LOGIN</h1>
 
-    {% if error %}
-        <p class="error">{{ error }}</p>
-    {% endif %}
+{% if error %}
+<p class="error">{{ error }}</p>
+{% endif %}
 
-    <form method="POST">
-        <input type="password" name="password" placeholder="ENTER PIN" required>
-        <button type="submit">AUTHENTICATE</button>
-    </form>
+<form method="POST">
+    <input type="password" name="pin" placeholder="ENTER ACCESS PIN" required>
+    <button>AUTHENTICATE</button>
+</form>
 
 {% else %}
 
-    <!-- 🧠 MAIN PANEL -->
-    <h1>MANOJ SYSTEM INTERFACE</h1>
-    <p class="status">STATUS: ONLINE</p>
+<h1>MANOJ PERSONAL INTERFACE</h1>
+<p class="status">STATUS : ONLINE</p>
 
-    <div class="files">
-        <h2>SECURE FILE ACCESS</h2>
-        <ul>
-            {% for file in files %}
-            <li>
-                <a href="#" onclick="previewFile('{{ file }}')">
-                    ▶ {{ file }}
-                </a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
+<div class="files">
+    <h2>MY FILES</h2>
+    <ul>
+        {% for file in files %}
+        <li>
+            <a href="#" onclick="preview('{{ file }}')">▶ {{ file }}</a>
+            <a class="download" href="/files/{{ file }}">⬇</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 
-    <div class="preview">
-        <h2>FILE PREVIEW</h2>
-        <pre id="previewBox">Select a file to preview...</pre>
-    </div>
+<div class="preview">
+    <h2>FILE PREVIEW</h2>
+    <pre id="viewer">Select a file...</pre>
+</div>
 
-    <br>
-    <a href="/logout" class="logout">LOGOUT</a>
+<a class="logout" href="/logout">LOGOUT</a>
 
 {% endif %}
 
@@ -57,14 +53,11 @@
 
 {% if session.auth %}
 <script>
-function previewFile(filename) {
-    fetch(`/preview/${filename}`)
-        .then(response => response.text())
+function preview(file) {
+    fetch("/preview/" + file)
+        .then(res => res.text())
         .then(data => {
-            document.getElementById("previewBox").textContent = data;
-        })
-        .catch(() => {
-            document.getElementById("previewBox").textContent = "Unable to load file";
+            document.getElementById("viewer").textContent = data;
         });
 }
 </script>
