@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MANOJ :: ACCESS</title>
+    <title>MANOJ :: SYSTEM</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 
-<div class="hud login">
-    <h1>SYSTEM AUTHORIZATION</h1>
+<div class="hud">
+
+{% if not session.auth %}
+
+    <!-- 🔐 LOGIN -->
+    <h1>SYSTEM ACCESS</h1>
 
     {% if error %}
         <p class="error">{{ error }}</p>
@@ -17,9 +21,54 @@
         <input type="password" name="password" placeholder="ENTER PIN" required>
         <button type="submit">AUTHENTICATE</button>
     </form>
+
+{% else %}
+
+    <!-- 🧠 MAIN PANEL -->
+    <h1>MANOJ SYSTEM INTERFACE</h1>
+    <p class="status">STATUS: ONLINE</p>
+
+    <div class="files">
+        <h2>SECURE FILE ACCESS</h2>
+        <ul>
+            {% for file in files %}
+            <li>
+                <a href="#" onclick="previewFile('{{ file }}')">
+                    ▶ {{ file }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="preview">
+        <h2>FILE PREVIEW</h2>
+        <pre id="previewBox">Select a file to preview...</pre>
+    </div>
+
+    <br>
+    <a href="/logout" class="logout">LOGOUT</a>
+
+{% endif %}
+
 </div>
 
 <div class="scanline"></div>
+
+{% if session.auth %}
+<script>
+function previewFile(filename) {
+    fetch(`/preview/${filename}`)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("previewBox").textContent = data;
+        })
+        .catch(() => {
+            document.getElementById("previewBox").textContent = "Unable to load file";
+        });
+}
+</script>
+{% endif %}
 
 </body>
 </html>
