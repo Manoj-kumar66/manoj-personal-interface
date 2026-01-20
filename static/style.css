@@ -1,48 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
-    font-family: Consolas, monospace;
+    box-sizing: border-box;
+    font-family: 'Orbitron', monospace;
 }
 
 body {
-    background: radial-gradient(circle at center, #02131a, #000);
-    color: #00ffe1;
+    background: radial-gradient(circle at center, #020b13, #000);
+    color: #00f6ff;
+    overflow-x: hidden;
 }
 
+/* MAIN HUD */
 .hud {
-    width: 85%;
-    max-width: 900px;
+    width: 90%;
+    max-width: 1000px;
     margin: 40px auto;
-    padding: 25px;
-    background: rgba(0,0,0,0.7);
-    border: 1px solid rgba(0,255,225,0.4);
-    box-shadow: 0 0 30px rgba(0,255,225,0.3);
+    padding: 30px;
+    background: rgba(0, 20, 30, 0.85);
+    border: 1px solid rgba(0, 255, 255, 0.4);
+    box-shadow:
+        0 0 20px rgba(0, 255, 255, 0.4),
+        inset 0 0 30px rgba(0, 255, 255, 0.15);
+    position: relative;
 }
 
-h1, h2 {
+/* CORNER HUD LINES */
+.hud::before,
+.hud::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #00f6ff;
+}
+
+.hud::before {
+    top: -2px;
+    left: -2px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.hud::after {
+    bottom: -2px;
+    right: -2px;
+    border-left: none;
+    border-top: none;
+}
+
+/* HEADINGS */
+h1 {
     text-align: center;
-    margin-bottom: 15px;
+    font-size: 28px;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #00ffaa;
 }
 
 .status {
     text-align: center;
     color: #00ff66;
+    margin-bottom: 20px;
+    animation: blink 1.5s infinite;
 }
 
-input, button {
+/* LOGIN */
+form input {
     width: 100%;
-    padding: 12px;
-    margin-top: 12px;
-    background: black;
-    color: #00ffe1;
-    border: 1px solid #00ffe1;
+    padding: 14px;
+    margin-top: 15px;
+    background: transparent;
+    border: 1px solid #00f6ff;
+    color: #00f6ff;
+    text-align: center;
+    font-size: 16px;
 }
 
-button:hover {
-    background: #00ffe1;
-    color: black;
+form button {
+    margin-top: 15px;
+    padding: 14px;
+    width: 100%;
+    background: linear-gradient(90deg, #00f6ff, #00ffaa);
+    border: none;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    letter-spacing: 2px;
 }
 
+form button:hover {
+    filter: brightness(1.2);
+}
+
+/* FILES */
 .files ul {
     list-style: none;
 }
@@ -50,42 +108,55 @@ button:hover {
 .files li {
     display: flex;
     justify-content: space-between;
-    margin: 6px 0;
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    background: rgba(0, 0, 0, 0.5);
+    border-left: 3px solid #00f6ff;
 }
 
 .files a {
-    color: #00ffe1;
+    color: #00f6ff;
     text-decoration: none;
+}
+
+.files a:hover {
+    color: #00ffaa;
 }
 
 .download {
     margin-left: 10px;
 }
 
+/* PREVIEW */
 .preview {
-    margin-top: 20px;
+    margin-top: 25px;
     padding: 15px;
-    background: rgba(0,0,0,0.8);
-    border: 1px solid rgba(0,255,225,0.3);
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(0, 255, 255, 0.3);
 }
 
 .preview pre {
     max-height: 300px;
     overflow-y: auto;
+    color: #00ffaa;
+    font-size: 14px;
 }
 
+/* LOGOUT */
 .logout {
     display: block;
     text-align: center;
-    margin-top: 15px;
-    color: red;
+    margin-top: 20px;
+    color: #ff5555;
 }
 
+/* ERROR */
 .error {
     color: red;
     text-align: center;
 }
 
+/* SCANLINE EFFECT */
 .scanline {
     position: fixed;
     inset: 0;
@@ -94,7 +165,17 @@ button:hover {
         to bottom,
         rgba(255,255,255,0.03),
         rgba(255,255,255,0.03) 1px,
-        transparent 2px,
-        transparent 4px
+        transparent 3px,
+        transparent 5px
     );
+    animation: scan 8s linear infinite;
+}
+
+@keyframes scan {
+    from { background-position-y: 0; }
+    to { background-position-y: 100%; }
+}
+
+@keyframes blink {
+    50% { opacity: 0.4; }
 }
