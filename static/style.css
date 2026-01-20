@@ -1,66 +1,32 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     font-family: Consolas, monospace;
 }
 
 body {
-    background: radial-gradient(circle, #020a0f, #000);
+    background: radial-gradient(circle at center, #02131a, #000);
     color: #00ffe1;
-    height: 100vh;
 }
 
 .hud {
-    width: 80%;
+    width: 85%;
     max-width: 900px;
-    margin: 50px auto;
+    margin: 40px auto;
     padding: 25px;
+    background: rgba(0,0,0,0.7);
     border: 1px solid rgba(0,255,225,0.4);
-    background: rgba(0,0,0,0.6);
-    box-shadow: 0 0 30px rgba(0,255,225,0.2);
+    box-shadow: 0 0 30px rgba(0,255,225,0.3);
 }
 
-h1 {
+h1, h2 {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .status {
     text-align: center;
     color: #00ff66;
-    margin-bottom: 20px;
-}
-
-.files ul {
-    list-style: none;
-}
-
-.files li {
-    margin: 8px 0;
-}
-
-.files a {
-    color: #00ffe1;
-    text-decoration: none;
-}
-
-.files a:hover {
-    text-shadow: 0 0 8px #00ffe1;
-}
-
-.preview {
-    margin-top: 20px;
-    padding: 15px;
-    border: 1px solid rgba(0,255,225,0.3);
-    background: rgba(0,0,0,0.7);
-}
-
-.preview pre {
-    max-height: 300px;
-    overflow-y: auto;
-    white-space: pre-wrap;
-    font-size: 14px;
 }
 
 input, button {
@@ -68,8 +34,8 @@ input, button {
     padding: 12px;
     margin-top: 12px;
     background: black;
-    border: 1px solid #00ffe1;
     color: #00ffe1;
+    border: 1px solid #00ffe1;
 }
 
 button:hover {
@@ -77,22 +43,52 @@ button:hover {
     color: black;
 }
 
+.files ul {
+    list-style: none;
+}
+
+.files li {
+    display: flex;
+    justify-content: space-between;
+    margin: 6px 0;
+}
+
+.files a {
+    color: #00ffe1;
+    text-decoration: none;
+}
+
+.download {
+    margin-left: 10px;
+}
+
+.preview {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(0,0,0,0.8);
+    border: 1px solid rgba(0,255,225,0.3);
+}
+
+.preview pre {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.logout {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: red;
+}
+
 .error {
     color: red;
     text-align: center;
 }
 
-.logout {
-    color: #00ffe1;
-    text-decoration: none;
-}
-
 .scanline {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     pointer-events: none;
     background: repeating-linear-gradient(
         to bottom,
