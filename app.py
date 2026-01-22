@@ -1,10 +1,7 @@
-from flask import Flask, render_template, redirect, url_for, request, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for
 import os
 
 app = Flask(__name__)
-app.secret_key = "manoj_secret_key"
-
-FILES_DIR = "my_files"
 
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -12,27 +9,18 @@ def login():
         username = request.form.get("username")
         password = request.form.get("password")
 
+        # simple demo login
         if username == "manoj" and password == "6666":
             return redirect(url_for("dashboard"))
+        else:
+            return render_template("index.html", error="Invalid credentials")
 
-    return render_template("login.html")
-
+    return render_template("index.html")
 
 @app.route("/dashboard")
 def dashboard():
-    files = os.listdir(FILES_DIR)
-    return render_template("dashboard.html", files=files)
-
-
-@app.route("/files/<filename>")
-def open_file(filename):
-    return send_from_directory(FILES_DIR, filename, as_attachment=False)
-
-
-@app.route("/logout")
-def logout():
-    return redirect(url_for("login"))
-
+    return render_template("dashboard.html")
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
