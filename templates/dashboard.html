@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MANOJ :: CYBER SYSTEM</title>
+    <title>MANOJ :: CYBER INTERFACE</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 
-<canvas id="matrix"></canvas>
+<div class="hud">
+    <h1>MANOJ SYSTEM INTERFACE</h1>
+    <p class="status">STATUS: ONLINE</p>
 
-<div class="panel">
-    <h1>MANOJ INTERFACE</h1>
-    <p class="status">SYSTEM ONLINE</p>
-
-    <h3>FILES</h3>
-    <ul>
-        {% for file in files %}
-        <li>
-            <a href="/files/{{ file }}" target="_blank">▶ {{ file }}</a>
-        </li>
-        {% endfor %}
-    </ul>
-
-    <a class="logout" href="/">LOGOUT</a>
+    <div class="files">
+        <h2>SECURE FILE ACCESS</h2>
+        <ul>
+            {% for file in files %}
+            <li>
+                <a href="/files/{{ file }}" target="_blank">
+                    ▶ {{ file }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 
-<script src="/static/matrix.js"></script>
 </body>
 </html>
