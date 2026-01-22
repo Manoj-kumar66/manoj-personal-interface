@@ -1,25 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>MANOJ :: SYSTEM</title>
-    <link rel="stylesheet" href="/static/style.css">
+<meta charset="UTF-8">
+<title>MANOJ :: SYSTEM</title>
+<link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 
-<h1>MANOJ SYSTEM ONLINE</h1>
+<canvas id="matrix"></canvas>
 
-<h2>SECURE FILES</h2>
-<ul>
-    {% for file in files %}
-    <li>
-        <a href="/files/{{ file }}" target="_blank">
-            ▶ {{ file }}
-        </a>
-    </li>
-    {% endfor %}
-</ul>
+<div class="hud">
+    <h1>MANOJ SYSTEM ONLINE</h1>
 
-<a href="/logout">LOGOUT</a>
+    <div class="panel-container">
+        <!-- FILE LIST -->
+        <div class="panel">
+            <h2>SECURE FILES</h2>
+            <ul>
+                {% for file in files %}
+                <li onclick="loadFile('{{ file }}')">
+                    ▶ {{ file }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
 
+        <!-- FILE PREVIEW -->
+        <div class="panel">
+            <h2>FILE PREVIEW</h2>
+            <pre id="preview">Select a file...</pre>
+
+            <a id="downloadBtn" href="#" download>
+                <button class="btn">DOWNLOAD</button>
+            </a>
+        </div>
+    </div>
+
+    <a href="/logout" class="logout">LOGOUT</a>
+</div>
+
+<script src="/static/script.js"></script>
 </body>
 </html>
