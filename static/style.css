@@ -1,60 +1,52 @@
 body {
     margin: 0;
-    background: black;
-    color: #00fff7;
     font-family: "Courier New", monospace;
-    overflow: hidden;
+    background: black;
+    color: #00ffcc;
 }
 
-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
+.login-bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.login-box, .panel {
-    width: 350px;
-    margin: 120px auto;
-    padding: 25px;
-    border: 2px solid #00fff7;
-    box-shadow: 0 0 20px #00fff7;
-    background: rgba(0,0,0,0.8);
+.login-box {
+    border: 2px solid #00ffcc;
+    padding: 30px;
+    width: 300px;
     text-align: center;
 }
 
-input, button {
+.login-box input {
     width: 90%;
     padding: 10px;
     margin: 10px 0;
     background: black;
-    border: 1px solid #00fff7;
-    color: #00fff7;
+    border: 1px solid #00ffcc;
+    color: #00ffcc;
 }
 
-button:hover {
-    background: #00fff7;
+.login-box button {
+    width: 100%;
+    padding: 10px;
+    background: #00ffcc;
     color: black;
+    font-weight: bold;
+    border: none;
     cursor: pointer;
 }
 
-.scan {
-    animation: scan 2s infinite;
+.hud {
+    padding: 30px;
 }
 
-@keyframes scan {
-    0% { box-shadow: 0 0 5px #00fff7; }
-    50% { box-shadow: 0 0 25px #00fff7; }
-    100% { box-shadow: 0 0 5px #00fff7; }
+.files ul {
+    list-style: none;
+    padding: 0;
 }
 
-a {
-    color: #00fff7;
-    text-decoration: none;
-}
-
-.logout {
-    display: block;
-    margin-top: 20px;
-    color: red;
+.files li {
+    margin: 10px 0;
 }
