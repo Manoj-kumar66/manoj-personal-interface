@@ -1,28 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>MANOJ :: CYBER INTERFACE</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <meta charset="UTF-8">
+    <title>MANOJ :: SYSTEM</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<div class="hud">
-    <h1>MANOJ SYSTEM INTERFACE</h1>
-    <p class="status">STATUS: ONLINE</p>
+<canvas id="matrix"></canvas>
 
-    <div class="files">
-        <h2>SECURE FILE ACCESS</h2>
-        <ul>
-            {% for file in files %}
-            <li>
-                <a href="/files/{{ file }}" target="_blank">
-                    ▶ {{ file }}
-                </a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
+<div class="dashboard">
+    <h1>MANOJ SYSTEM ONLINE</h1>
+    <p>Welcome to the secure interface.</p>
+
+    <a href="/logout" class="logout">LOGOUT</a>
 </div>
 
+<script src="{{ url_for('static', filename='script.js') }}"></cript>
 </body>
 </html>
