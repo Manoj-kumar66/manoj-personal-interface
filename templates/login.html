@@ -1,22 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>MANOJ :: SECURE ACCESS</title>
+    <title>SECURE ACCESS</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
-<body class="login-body">
+<body>
 
-<div class="scan-box">
-    <h1>MANOJ SYSTEM</h1>
-    <p class="scan-text">SCANNING IDENTITY...</p>
+<canvas id="matrix"></canvas>
 
-    <input type="password" id="pin" placeholder="ENTER ACCESS PIN">
-    <button onclick="login()">ACCESS</button>
-
-    <div class="scan-line"></div>
+<div class="login-box scan">
+    <h2>🔐 SYSTEM LOGIN</h2>
+    <form method="POST">
+        <input type="text" name="username" placeholder="USERNAME" required>
+        <input type="password" name="password" placeholder="PASSWORD" required>
+        <button type="submit">ACCESS</button>
+    </form>
 </div>
 
-<script src="/static/script.js"></script>
+<audio autoplay>
+    <source src="/static/startup.mp3" type="audio/mpeg">
+</audio>
+
+<script src="/static/matrix.js"></script>
 </body>
 </html>
