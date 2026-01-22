@@ -1,92 +1,60 @@
 body {
     margin: 0;
-    font-family: 'Courier New', monospace;
     background: black;
-    color: #00ffee;
+    color: #00fff7;
+    font-family: "Courier New", monospace;
     overflow: hidden;
 }
 
-/* MATRIX BACKGROUND */
-body::before {
-    content: "";
+canvas {
     position: fixed;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-        0deg,
-        rgba(0,255,255,0.05),
-        rgba(0,255,255,0.05) 1px,
-        transparent 1px,
-        transparent 3px
-    );
-    animation: scroll 3s linear infinite;
+    top: 0;
+    left: 0;
+    z-index: -1;
 }
 
-@keyframes scroll {
-    from { background-position: 0 0; }
-    to { background-position: 0 100px; }
-}
-
-/* LOGIN BOX */
-.login-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.scan-box {
-    border: 2px solid #00ffee;
-    padding: 40px;
-    box-shadow: 0 0 25px #00ffee;
+.login-box, .panel {
+    width: 350px;
+    margin: 120px auto;
+    padding: 25px;
+    border: 2px solid #00fff7;
+    box-shadow: 0 0 20px #00fff7;
+    background: rgba(0,0,0,0.8);
     text-align: center;
-    position: relative;
 }
 
-.scan-box h1 {
-    margin-bottom: 10px;
-}
-
-.scan-text {
-    color: #00ff88;
-    margin-bottom: 20px;
-}
-
-input {
-    background: black;
-    border: 1px solid #00ffee;
-    color: #00ffee;
+input, button {
+    width: 90%;
     padding: 10px;
-    width: 100%;
-    margin-bottom: 15px;
-}
-
-button {
+    margin: 10px 0;
     background: black;
-    border: 1px solid #00ffee;
-    color: #00ffee;
-    padding: 10px;
-    width: 100%;
-    cursor: pointer;
+    border: 1px solid #00fff7;
+    color: #00fff7;
 }
 
 button:hover {
-    background: #00ffee;
+    background: #00fff7;
     color: black;
+    cursor: pointer;
 }
 
-/* SCAN LINE */
-.scan-line {
-    position: absolute;
-    width: 100%;
-    height: 3px;
-    background: #00ffee;
-    top: 0;
-    left: 0;
+.scan {
     animation: scan 2s infinite;
 }
 
 @keyframes scan {
-    from { top: 0; }
-    to { top: 100%; }
+    0% { box-shadow: 0 0 5px #00fff7; }
+    50% { box-shadow: 0 0 25px #00fff7; }
+    100% { box-shadow: 0 0 5px #00fff7; }
+}
+
+a {
+    color: #00fff7;
+    text-decoration: none;
+}
+
+.logout {
+    display: block;
+    margin-top: 20px;
+    color: red;
 }
