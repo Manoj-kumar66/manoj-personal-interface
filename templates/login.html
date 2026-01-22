@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MANOJ :: CYBER SYSTEM</title>
+    <title>MANOJ :: AI CORE</title>
     <link rel="stylesheet" href="/static/style.css">
+
+    <!-- Three.js -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
 </head>
-<body>
+<body onload="startup()">
+
+<audio id="bootSound" src="/static/startup.mp3"></audio>
+
+<canvas id="bg"></canvas>
 
 <div class="hud">
 
 {% if not session.auth %}
 
-<h1>SYSTEM LOGIN</h1>
-
-{% if error %}
-<p class="error">{{ error }}</p>
-{% endif %}
+<h1 id="typing"></h1>
 
 <form method="POST">
     <input type="password" name="pin" placeholder="ENTER ACCESS PIN" required>
@@ -23,24 +26,41 @@
 
 {% else %}
 
-<h1>MANOJ PERSONAL INTERFACE</h1>
-<p class="status">STATUS : ONLINE</p>
+<h1>MANOJ AI INTERFACE</h1>
+<p class="status">SYSTEM ONLINE</p>
 
-<div class="files">
-    <h2>MY FILES</h2>
-    <ul>
-        {% for file in files %}
-        <li>
-            <a href="#" onclick="preview('{{ file }}')">▶ {{ file }}</a>
-            <a class="download" href="/files/{{ file }}">⬇</a>
-        </li>
-        {% endfor %}
-    </ul>
+<div class="grid">
+
+<div class="panel">
+<h2>FILES</h2>
+<ul>
+{% for file in files %}
+<li>
+<a href="#" onclick="preview('{{ file }}')">▶ {{ file }}</a>
+<a class="download" href="/files/{{ file }}">⬇</a>
+</li>
+{% endfor %}
+</ul>
 </div>
 
-<div class="preview">
-    <h2>FILE PREVIEW</h2>
-    <pre id="viewer">Select a file...</pre>
+<div class="panel">
+<h2>FILE PREVIEW</h2>
+<pre id="viewer">Select a file...</pre>
+</div>
+
+<div class="panel">
+<h2>AI CORE</h2>
+<div class="chat">
+<p><b>JARVIS:</b> Awaiting commands…</p>
+</div>
+<input placeholder="AI coming soon..." disabled>
+</div>
+
+<div class="panel">
+<h2>HOLOGRAM</h2>
+<div id="holo"></div>
+</div>
+
 </div>
 
 <a class="logout" href="/logout">LOGOUT</a>
@@ -51,14 +71,14 @@
 
 <div class="scanline"></div>
 
+<script src="/static/script.js"></script>
+
 {% if session.auth %}
 <script>
-function preview(file) {
+function preview(file){
     fetch("/preview/" + file)
-        .then(res => res.text())
-        .then(data => {
-            document.getElementById("viewer").textContent = data;
-        });
+    .then(r=>r.text())
+    .then(d=>viewer.textContent=d)
 }
 </script>
 {% endif %}
