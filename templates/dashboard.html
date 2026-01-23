@@ -1,44 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>MANOJ :: SYSTEM</title>
-<link rel="stylesheet" href="/static/style.css">
+    <meta charset="UTF-8">
+    <title>MANOJ :: FILE SYSTEM</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<canvas id="matrix"></canvas>
+<div class="login-container">
+    <h1>SECURE FILES</h1>
 
-<div class="hud">
-    <h1>MANOJ SYSTEM ONLINE</h1>
-
-    <div class="panel-container">
-        <!-- FILE LIST -->
-        <div class="panel">
-            <h2>SECURE FILES</h2>
-            <ul>
-                {% for file in files %}
-                <li onclick="loadFile('{{ file }}')">
-                    ▶ {{ file }}
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <!-- FILE PREVIEW -->
-        <div class="panel">
-            <h2>FILE PREVIEW</h2>
-            <pre id="preview">Select a file...</pre>
-
-            <a id="downloadBtn" href="#" download>
-                <button class="btn">DOWNLOAD</button>
-            </a>
-        </div>
-    </div>
-
-    <a href="/logout" class="logout">LOGOUT</a>
+    {% if files %}
+        <ul>
+        {% for file in files %}
+            <li>
+                📄 {{ file }}
+                <br>
+                <a href="/preview/{{ file }}" target="_blank">👁 Preview</a>
+                |
+                <a href="/download/{{ file }}">⬇ Download</a>
+            </li>
+            <hr>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No files found</p>
+    {% endif %}
 </div>
 
-<script src="/static/script.js"></script>
 </body>
 </html>
