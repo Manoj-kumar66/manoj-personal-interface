@@ -5,7 +5,7 @@
     box-sizing: border-box;
 }
 
-/* FIX WHITE BACKGROUND ISSUE */
+/* BODY FIX */
 html, body {
     width: 100%;
     height: 100%;
@@ -14,20 +14,20 @@ html, body {
     font-family: monospace;
 }
 
-/* MATRIX BACKGROUND */
+/* MATRIX = PURE BACKGROUND */
 canvas {
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0;
     z-index: 0;
+    pointer-events: none; /* 🔥 VERY IMPORTANT */
 }
 
-/* FILE BOX */
-.files-box {
+/* LOGIN BOX */
+.login-box {
     position: relative;
-    z-index: 2;
+    z-index: 10; /* 🔥 ALWAYS ABOVE MATRIX */
     width: 90%;
-    max-width: 420px;
+    max-width: 350px;
     margin: 120px auto;
     padding: 25px;
     background: rgba(0, 0, 0, 0.85);
@@ -37,25 +37,39 @@ canvas {
     text-align: center;
 }
 
-/* TITLE */
-.files-box h2 {
-    margin-bottom: 20px;
-    letter-spacing: 2px;
-}
-
-/* FILE ITEM */
-.file-item {
+/* INPUTS */
+.login-box input {
+    width: 100%;
     padding: 10px;
-    border-bottom: 1px solid #00ffcc;
-}
-
-/* LINKS */
-.file-item a {
+    margin: 10px 0;
+    background: black;
+    border: 1px solid #00ffcc;
     color: #00ffcc;
-    text-decoration: none;
-    margin: 0 8px;
 }
 
-.file-item a:hover {
-    text-shadow: 0 0 5px #00ffcc;
+/* BUTTON */
+.login-box button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #00ffcc;
+    border: none;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
 }
+
+/* DASHBOARD FILE BOX */
+.files-box {
+    position: relative;
+    z-index: 10;
+    width: 90%;
+    max-width: 420px;
+    margin: 120px auto;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.85);
+    border: 2px solid #00ffcc;
+    box-shadow: 0 0 25px #00ffcc;
+    color: #00ffcc;
+    text-align: center;
+    }
