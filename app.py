@@ -8,13 +8,17 @@ def login():
         username = request.form.get("username")
         password = request.form.get("password")
 
+        # simple demo login
         if username == "manoj" and password == "6666":
             return redirect(url_for("dashboard"))
-        else:
-            return render_template("index.html", error="Invalid credentials")
 
-    return render_template("index.html")
+    return render_template("login.html")
+
 
 @app.route("/dashboard")
 def dashboard():
     return render_template("dashboard.html")
+
+
+if __name__ == "__main__":
+    app.run()
