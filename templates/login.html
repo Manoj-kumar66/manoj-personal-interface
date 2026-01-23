@@ -2,25 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SECURE LOGIN</title>
+    <title>MANOJ :: LOGIN</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
+<!-- MATRIX BACKGROUND -->
 <canvas id="matrix"></canvas>
 
-<div class="login-box">
-    <h1>SECURE ACCESS</h1>
+<!-- LOGIN UI -->
+<div class="login-container">
+    <h1>MANOJ SYSTEM</h1>
+    <p class="scan-text">SECURE ACCESS REQUIRED</p>
 
     <form method="POST">
         <input type="text" name="username" placeholder="USERNAME" required>
         <input type="password" name="password" placeholder="PASSWORD" required>
         <button type="submit">LOGIN</button>
     </form>
-
-    {% if error %}
-        <p class="error">{{ error }}</p>
-    {% endif %}
 </div>
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
