@@ -3,99 +3,59 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Courier New", monospace;
 }
 
-/* MATRIX CANVAS */
-#matrix {
-    position: fixed;
-    top: 0;
-    left: 0;
+/* FIX WHITE BACKGROUND ISSUE */
+html, body {
     width: 100%;
     height: 100%;
     background: black;
-    z-index: 0;
-    pointer-events: none;
+    overflow: hidden;
+    font-family: monospace;
 }
 
-/* LOGIN BOX */
-.login-container {
-    position: relative;
-    z-index: 10;
-    width: 350px;
-    margin: 120px auto;
-    padding: 30px;
-    border: 1px solid #00ffcc;
-    background: rgba(0, 0, 0, 0.85);
-    box-shadow: 0 0 20px #00ffcc;
-    text-align: center;
-    color: #00ffcc;
-}
-
-/* TEXT */
-.login-container h1 {
-    margin-bottom: 10px;
-    font-size: 24px;
-}
-
-.scan-text {
-    margin-bottom: 20px;
-    font-size: 14px;
-    color: #00ffaa;
-    animation: flicker 1.5s infinite;
-}
-
-/* INPUTS */
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    background: black;
-    border: 1px solid #00ffcc;
-    color: #00ffcc;
-    outline: none;
-}
-
-/* BUTTON */
-button {
-    width: 100%;
-    padding: 10px;
-    background: #00ffcc;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-button:hover {
-    background: #00ffaa;
-}
-
-/* ANIMATION */
-@keyframes flicker {
-    0% { opacity: 1; }
-    50% { opacity: 0.6; }
-    100% { opacity: 1; }
-    }
-/* ===== FIX BACKGROUND DISAPPEARING (MOBILE SAFE) ===== */
-
-html, body {
-    background-color: black;
-    min-height: 100%;
-}
-
-/* Make sure matrix stays behind */
+/* MATRIX BACKGROUND */
 canvas {
-    position: fixed !important;
+    position: fixed;
     top: 0;
     left: 0;
-    z-index: 0 !important;
+    z-index: 0;
 }
 
-/* Keep your content always visible */
-.container,
-.login-box,
-.files-box,
-.content {
+/* FILE BOX */
+.files-box {
     position: relative;
-    z-index: 2 !important;
+    z-index: 2;
+    width: 90%;
+    max-width: 420px;
+    margin: 120px auto;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.85);
+    border: 2px solid #00ffcc;
+    box-shadow: 0 0 25px #00ffcc;
+    color: #00ffcc;
+    text-align: center;
+}
+
+/* TITLE */
+.files-box h2 {
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+/* FILE ITEM */
+.file-item {
+    padding: 10px;
+    border-bottom: 1px solid #00ffcc;
+}
+
+/* LINKS */
+.file-item a {
+    color: #00ffcc;
+    text-decoration: none;
+    margin: 0 8px;
+}
+
+.file-item a:hover {
+    text-shadow: 0 0 5px #00ffcc;
 }
