@@ -76,3 +76,26 @@ button:hover {
     50% { opacity: 0.6; }
     100% { opacity: 1; }
     }
+/* ===== FIX BACKGROUND DISAPPEARING (MOBILE SAFE) ===== */
+
+html, body {
+    background-color: black;
+    min-height: 100%;
+}
+
+/* Make sure matrix stays behind */
+canvas {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    z-index: 0 !important;
+}
+
+/* Keep your content always visible */
+.container,
+.login-box,
+.files-box,
+.content {
+    position: relative;
+    z-index: 2 !important;
+}
