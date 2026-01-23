@@ -1,85 +1,78 @@
+/* RESET */
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     font-family: "Courier New", monospace;
-    color: #00ffff;
 }
 
-body {
-    background: black;
-    overflow: hidden;
-}
-
-canvas {
+/* MATRIX CANVAS */
+#matrix {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 0;
-}
-
-.hud {
-    position: relative;
-    z-index: 2;
-    padding: 30px;
-}
-
-h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    text-shadow: 0 0 15px #00ffff;
-}
-
-.panel-container {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-}
-
-.panel {
-    width: 40%;
-    border: 2px solid #00ffff;
-    padding: 15px;
-    box-shadow: 0 0 20px #00ffff;
-    background: rgba(0,0,0,0.7);
-}
-
-ul {
-    list-style: none;
-}
-
-li {
-    cursor: pointer;
-    padding: 8px;
-}
-
-li:hover {
-    background: #00ffff;
-    color: black;
-}
-
-pre {
-    height: 200px;
-    overflow-y: auto;
-    border: 1px solid #00ffff;
-    padding: 10px;
-}
-
-.btn {
-    margin-top: 10px;
-    padding: 10px;
+    width: 100%;
+    height: 100%;
     background: black;
-    border: 1px solid #00ffff;
-    cursor: pointer;
+    z-index: 0;
+    pointer-events: none;
 }
 
-.btn:hover {
-    background: #00ffff;
-    color: black;
-}
-
-.logout {
-    display: block;
-    margin-top: 20px;
+/* LOGIN BOX */
+.login-container {
+    position: relative;
+    z-index: 10;
+    width: 350px;
+    margin: 120px auto;
+    padding: 30px;
+    border: 1px solid #00ffcc;
+    background: rgba(0, 0, 0, 0.85);
+    box-shadow: 0 0 20px #00ffcc;
     text-align: center;
-    color: red;
+    color: #00ffcc;
 }
+
+/* TEXT */
+.login-container h1 {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.scan-text {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #00ffaa;
+    animation: flicker 1.5s infinite;
+}
+
+/* INPUTS */
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background: black;
+    border: 1px solid #00ffcc;
+    color: #00ffcc;
+    outline: none;
+}
+
+/* BUTTON */
+button {
+    width: 100%;
+    padding: 10px;
+    background: #00ffcc;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #00ffaa;
+}
+
+/* ANIMATION */
+@keyframes flicker {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+    }
