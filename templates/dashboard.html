@@ -1,71 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Secure Files</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Dashboard</title>
 </head>
-
 <body>
 
-<!-- MATRIX CANVAS -->
-<canvas id="matrix"></canvas>
+<h2>File Explorer</h2>
 
-<!-- CONTENT -->
-<div class="files-box">
-    <h2>SECURE FILES</h2>
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="files" multiple webkitdirectory>
+    <button type="submit">Upload</button>
+</form>
 
-    <div class="file-item">
-        📄 miniproject.txt
-        <a href="/preview/miniproject.txt">Preview</a>
-        |
-        <a href="/download/miniproject.txt">Download</a>
-    </div>
-</div>
+<hr>
 
-<!-- MATRIX SCRIPT (INLINE, SAFE) -->
-<script>
-const canvas = document.getElementById("matrix");
-const ctx = canvas.getContext("2d");
+<ul>
+    {% for file in files %}
+        <li>
+            {{ file }}
+            <a href="/download/{{ file }}">Download</a>
+        </li>
+    {% endfor %}
+</ul>
 
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
-
-const letters = "01";
-const fontSize = 14;
-let columns = canvas.width / fontSize;
-let drops = [];
-
-for (let x = 0; x < columns; x++) {
-    drops[x] = 1;
-}
-
-function drawMatrix() {
-    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = "#00ffcc";
-    ctx.font = fontSize + "px monospace";
-
-    for (let i = 0; i < drops.length; i++) {
-        const text = letters.charAt(Math.floor(Math.random() * letters.length));
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-            drops[i] = 0;
-        }
-        drops[i]++;
-    }
-}
-
-setInterval(drawMatrix, 35);
-</script>
+<br>
+<a href="/logout">Logout</a>
 
 </body>
 </html>
