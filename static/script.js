@@ -1,23 +1,26 @@
-const canvas = document.getElementById("matrix");
+const canvas = document.createElement("canvas");
+canvas.id = "matrix";
+document.body.prepend(canvas);
+
 const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const letters = "01MANOJ_SYSTEM";
+const letters = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const fontSize = 16;
 const columns = canvas.width / fontSize;
 
 const drops = [];
-for (let i = 0; i < columns; i++) {
-    drops[i] = 1;
+for (let x = 0; x < columns; x++) {
+    drops[x] = 1;
 }
 
 function drawMatrix() {
     ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = "#00ffcc";
+    ctx.fillStyle = "#00ff99";
     ctx.font = fontSize + "px monospace";
 
     for (let i = 0; i < drops.length; i++) {
@@ -27,8 +30,14 @@ function drawMatrix() {
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
             drops[i] = 0;
         }
+
         drops[i]++;
     }
 }
 
 setInterval(drawMatrix, 33);
+
+window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
