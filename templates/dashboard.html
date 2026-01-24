@@ -1,36 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Dashboard</title>
-
-    <!-- IMPORTANT: link your existing CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<!-- background layer -->
-<div class="background"></div>
+<div class="dashboard">
+    <h1>File Explorer</h1>
 
-<!-- main dashboard box -->
-<div class="container">
-    <h2>SECURE FILES</h2>
-
-    <!-- upload -->
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="files" multiple webkitdirectory>
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <input type="file" name="file">
         <button type="submit">Upload</button>
     </form>
 
     <hr>
 
-    <!-- file list -->
-    <ul class="file-list">
+    <ul>
         {% for file in files %}
-        <li>
-            📄 {{ file }}
-            <a href="/download/{{ file }}">⬇ Download</a>
-        </li>
+            <li>{{ file }} -
+                <a href="/download/{{ file }}">Download</a>
+            </li>
         {% endfor %}
     </ul>
 
@@ -38,5 +28,6 @@
     <a href="/logout">Logout</a>
 </div>
 
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
