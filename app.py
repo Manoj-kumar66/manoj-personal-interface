@@ -12,8 +12,8 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 # ---------------- LOGIN CREDENTIALS ----------------
-USERNAME = "admin"
-PASSWORD_HASH = generate_password_hash("1234")  # password = 1234
+USERNAME = "Manoj"
+PASSWORD_HASH = generate_password_hash("6666")  # password = 1234
 
 # ---------------- ROUTES ----------------
 @app.route("/", methods=["GET", "POST"])
@@ -73,3 +73,4 @@ def logout():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
