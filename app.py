@@ -4,25 +4,27 @@ from werkzeug.utils import secure_filename
 import os
 
 app = Flask(__name__)
-app.secret_key = "supersecretkey"
+app.secret_key = "manoj_secret_key"
 
+# ---------------- CONFIG ----------------
 UPLOAD_FOLDER = "my_files"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
-# demo credentials
-USERNAME = "Manoj"
-PASSWORD_HASH = generate_password_hash("6666")
+# ---------------- LOGIN CREDENTIALS ----------------
+USERNAME = "admin"
+PASSWORD_HASH = generate_password_hash("1234")  # password = 1234
 
+# ---------------- ROUTES ----------------
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        if (
-            request.form["username"] == USERNAME
-            and check_password_hash(PASSWORD_HASH, request.form["password"])
-        ):
-            session["user"] = USERNAME
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        if username == USERNAME and check_password_hash(PASSWORD_HASH, password):
+            session["user"] = username
             return redirect(url_for("dashboard"))
-        return "Invalid login"
 
     return render_template("login.html")
 
@@ -32,12 +34,7 @@ def dashboard():
     if "user" not in session:
         return redirect(url_for("login"))
 
-    files = []
-    for root, dirs, filenames in os.walk(UPLOAD_FOLDER):
-        for name in filenames:
-            full_path = os.path.join(root, name)
-            files.append(full_path.replace(UPLOAD_FOLDER + "/", ""))
-
+    files = os.listdir(app.config["UPLOAD_FOLDER"])
     return render_template("dashboard.html", files=files)
 
 
@@ -46,22 +43,26 @@ def upload():
     if "user" not in session:
         return redirect(url_for("login"))
 
-    uploaded_files = request.files.getlist("files")
+    if "file" not in request.files:
+        return redirect(url_for("dashboard"))
 
-    for file in uploaded_files:
-        if file.filename == "":
-            continue
+    file = request.files["file"]
 
-        filepath = os.path.join(UPLOAD_FOLDER, file.filename)
-        os.makedirs(os.path.dirname(filepath), exist_ok=True)
-        file.save(filepath)
+    if file.filename == "":
+        return redirect(url_for("dashboard"))
+
+    filename = secure_filename(file.filename)
+    file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
 
     return redirect(url_for("dashboard"))
 
 
-@app.route("/download/<path:filename>")
+@app.route("/download/<filename>")
 def download(filename):
-    return send_from_directory(UPLOAD_FOLDER, filename, as_attachment=True)
+    if "user" not in session:
+        return redirect(url_for("login"))
+
+    return send_from_directory(app.config["UPLOAD_FOLDER"], filename, as_attachment=True)
 
 
 @app.route("/logout")
