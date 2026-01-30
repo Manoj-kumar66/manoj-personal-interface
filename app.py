@@ -4,30 +4,31 @@ from werkzeug.utils import secure_filename
 import os
 
 app = Flask(__name__)
-app.secret_key = "manoj_secret_key"
+app.secret_key = "supersecretkey"
 
-# ---------------- CONFIG ----------------
-UPLOAD_FOLDER = "my_files"
+# 🔹 UPLOAD CONFIG
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = os.path.join(BASE_DIR, "my_files")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
-# ---------------- LOGIN CREDENTIALS ----------------
-USERNAME = "Manoj"
-PASSWORD_HASH = generate_password_hash("6666")  # password = 1234
+# 🔹 DEMO USER
+users = {
+    "Manoj": generate_password_hash("6666")
+}
 
-# ---------------- ROUTES ----------------
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        username = request.form.get("username")
-        password = request.form.get("password")
+        username = request.form["username"]
+        password = request.form["password"]
 
-        if username == USERNAME and check_password_hash(PASSWORD_HASH, password):
+        if username in users and check_password_hash(users[username], password):
             session["user"] = username
             return redirect(url_for("dashboard"))
 
     return render_template("login.html")
-
 
 @app.route("/dashboard")
 def dashboard():
@@ -36,7 +37,6 @@ def dashboard():
 
     files = os.listdir(app.config["UPLOAD_FOLDER"])
     return render_template("dashboard.html", files=files)
-
 
 @app.route("/upload", methods=["POST"])
 def upload():
@@ -52,10 +52,11 @@ def upload():
         return redirect(url_for("dashboard"))
 
     filename = secure_filename(file.filename)
-    file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+    save_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+
+    file.save(save_path)   # 🔥 THIS IS THE KEY LINE
 
     return redirect(url_for("dashboard"))
-
 
 @app.route("/download/<filename>")
 def download(filename):
@@ -64,13 +65,10 @@ def download(filename):
 
     return send_from_directory(app.config["UPLOAD_FOLDER"], filename, as_attachment=True)
 
-
 @app.route("/logout")
 def logout():
-    session.clear()
+    session.pop("user", None)
     return redirect(url_for("login"))
-
 
 if __name__ == "__main__":
     app.run(debug=True)
-
